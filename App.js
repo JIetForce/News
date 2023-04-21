@@ -5,6 +5,17 @@ import Footer from './components/footer/Footer';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
+const headerLinks = [
+  'Top News',
+  'Education',
+  'Health',
+  'Money',
+  'Travel',
+  'Business',
+  'Science',
+  'Technology',
+];
+
 function App() {
   const [news, setNews] = useState([]);
   const [searchInput, setSearchInput] = useState('');
@@ -58,7 +69,9 @@ function App() {
         searchInput={searchInput}
         handleSearchChange={handleSearchChange}
         handleSubmitForm={handleSubmitForm}
+        headerLinks={headerLinks}
         fetchNews={fetchNews}
+        title={title}
       />
       <section className="wrapper">
         {isLoading ? <p>Loading...</p> : <News news={news} title={title} />}

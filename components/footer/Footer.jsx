@@ -1,10 +1,11 @@
 import React from 'react';
-import './footer.less';
 
 const Footer = () => {
   return (
     <footer className="footer">
-      <p>Footer</p>
+      <div className="footer__content">
+        <p>© 2023 News</p>
+      </div>
     </footer>
   );
 };

@@ -3,14 +3,62 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: #ccc;
+  background: #444444;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
-.header h1 {
-  margin: 0;
+.header .header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+}
+.header .header-actions .header-actions__links {
+  display: flex;
+  height: 100%;
+  gap: 24px;
+  margin: 0 16px;
+  padding: 0;
+}
+.header .header-actions .header-actions__links .header-actions__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 24px;
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+  text-decoration: none;
+  height: 58px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+.header .header-actions .header-actions__links .header-actions__link.header-actions__link--active {
+  border-bottom: 2px solid #fff;
+}
+.header .header-actions .header-actions__input {
+  height: 30px;
+  font-size: 18px;
+  background: #666;
+  outline: none;
+  border: 1px solid #242424;
+  border-radius: 4px;
   color: #fff;
+  padding: 0 8px;
+}
+.header .header-actions .header-actions__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+.header .header-actions .header-actions__input::placeholder {
+  color: #e6e5e5;
+}
+@media (max-width: 1200px) {
+  .header .header-actions {
+    justify-content: flex-start;
+    overflow: auto hidden;
+  }
 }

@@ -12,18 +12,18 @@ const News = ({ news, title }) => {
     return str;
   };
 
+  const newsItems = news?.map((article, index) => (
+    <NewsItem
+      {...article}
+      title={removeSourceFromTitle(article.title)}
+      key={index}
+    />
+  ));
+
   return (
     <div className="news">
-      <h2 className="news-title">{title}</h2>
-      <ul className="news-list">
-        {news?.map((article, index) => (
-          <NewsItem
-            {...article}
-            title={removeSourceFromTitle(article.title)}
-            key={index}
-          />
-        ))}
-      </ul>
+      <h1 className="news-title">{title}</h1>
+      <ul className="news-list">{newsItems}</ul>
     </div>
   );
 };

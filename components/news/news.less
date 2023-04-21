@@ -1,7 +1,6 @@
 .news {
-
   .news-title {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
     text-transform: capitalize;
   }
@@ -23,11 +22,12 @@
     cursor: pointer;
     width: 320px;
     height: 350px;
-    background: #5a636d;
+    background: #666;
     color: #fff;
     text-align: center;
     text-decoration: none;
     border-radius: 4px;
+    transition: all 0.3s ease-in-out;
 
     &:visited h3 {
       color: #b5b8e6;
@@ -62,6 +62,12 @@
         display: flex;
         align-items: flex-end;
       }
+    }
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease-in-out;
     }
   }
 }
