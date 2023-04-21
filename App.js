@@ -1,23 +1,44 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import News from './components/news/News';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 function App() {
   const [news, setNews] = useState([]);
   const [searchInput, setSearchInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [title, setTitle] = useState('Top News');
 
-  const getTopHeadlinesNews = useCallback(() => {
-    const topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?country=ua&language=uk&apiKey=${API_KEY}`;
-    fetch(topHeadlinesUrl)
+  const fetchNews = useCallback((tag = '', search = '') => {
+    const baseUrl = `https://newsapi.org/v2/everything?language=en&apiKey=${API_KEY}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=us&language=en&apiKey=${API_KEY}`;
+
+    setIsLoading(true);
+    setTitle('Top News');
+
+    if (tag) {
+      url = `${baseUrl}&q=${tag}`;
+      setSearchInput('');
+      setTitle(tag);
+    } else if (search) {
+      url = `${baseUrl}&q=${search}`;
+      setTitle(search);
+    }
+
+    fetch(url)
       .then((response) => response.json())
-      .then((data) => setNews(data.articles))
+      .then((data) => {
+        setNews(data.articles);
+        setIsLoading(false);
+      })
       .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
-    getTopHeadlinesNews();
-  }, [getTopHeadlinesNews]);
+    fetchNews();
+  }, [fetchNews]);
 
   const handleSearchChange = (e) => {
     setSearchInput(e.target.value);
@@ -26,21 +47,23 @@ function App() {
   const handleSubmitForm = (e) => {
     e.preventDefault();
 
-    const url = `https://newsapi.org/v2/everything?language=uk&apiKey=${API_KEY}&q=${searchInput}`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => setNews(data.articles));
+    setIsLoading(true);
+    fetchNews('', searchInput);
+    setSearchInput('');
   };
 
   return (
     <div>
-      <News
-        news={news}
+      <Header
         searchInput={searchInput}
         handleSearchChange={handleSearchChange}
         handleSubmitForm={handleSubmitForm}
-        getTopHeadlinesNews={getTopHeadlinesNews}
+        fetchNews={fetchNews}
       />
+      <section className="wrapper">
+        {isLoading ? <p>Loading...</p> : <News news={news} title={title} />}
+      </section>
+      <Footer />
     </div>
   );
 }

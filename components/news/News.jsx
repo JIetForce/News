@@ -1,13 +1,7 @@
 import React from 'react';
 import NewsItem from './NewsItem';
 
-const News = ({
-  news,
-  searchInput,
-  handleSearchChange,
-  handleSubmitForm,
-  getTopHeadlinesNews,
-}) => {
+const News = ({ news, title }) => {
   const removeSourceFromTitle = (str) => {
     const separatorIndex = str.lastIndexOf('-');
     const hasSourceAtEnd =
@@ -20,20 +14,9 @@ const News = ({
 
   return (
     <div className="news">
-      <h1>News</h1>
-      <form className="news-actions" onSubmit={handleSubmitForm}>
-        <button type="button" onClick={getTopHeadlinesNews}>
-          Top News
-        </button>
-        <input
-          type="search"
-          value={searchInput}
-          onChange={(e) => handleSearchChange(e)}
-        />
-        <button type="submit">Find</button>
-      </form>
+      <h2 className="news-title">{title}</h2>
       <ul className="news-list">
-        {news.map((article, index) => (
+        {news?.map((article, index) => (
           <NewsItem
             {...article}
             title={removeSourceFromTitle(article.title)}

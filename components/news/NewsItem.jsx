@@ -9,8 +9,10 @@ const NewsItem = ({ title, urlToImage, url, source }) => {
       className="news-item"
     >
       <img src={urlToImage} alt="img" />
-      <h3>{title}</h3>
-      <p>{source?.name}</p>
+      <div className='news-item__details'>
+        <h3>{title}</h3>
+        <p>{source?.name}</p>
+      </div>
     </a>
   );
 };
